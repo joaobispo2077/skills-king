@@ -6,13 +6,14 @@ import {
   StyleSheet,
   TextInput,
   Platform,
+  FlatList,
 } from 'react-native';
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkillCard';
 
 export const Home = () => {
   const [newSkill, setNewSkill] = useState('');
-  const [skills, setSkills] = useState(['dfsad', 'testing']);
+  const [skills, setSkills] = useState([]);
 
   const handleAddNewSkill = () => {
     const hasSkill = newSkill.trim().length >= 0;
@@ -38,9 +39,11 @@ export const Home = () => {
 
       <Text style={[styles.title, { marginTop: 50 }]}>My skills</Text>
 
-      {skills.map((skill, index) => (
-        <SkillCard key={index} skill={skill} />
-      ))}
+      <FlatList
+        data={skills}
+        keyExtractor={item => item}
+        renderItem={({ item }) => <SkillCard skill={item} />}
+      />
     </SafeAreaView>
   );
 };

@@ -11,9 +11,14 @@ import {
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkillCard';
 
+export interface ISkill {
+  id: string;
+  name: string;
+}
+
 export const Home = () => {
   const [newSkill, setNewSkill] = useState('');
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState<ISkill[]>([]);
   const [gretting, setGretting] = useState('');
 
   const handleAddNewSkill = () => {
@@ -22,11 +27,17 @@ export const Home = () => {
       return;
     }
     console.info('hayoo');
-    setSkills(previousSkills => previousSkills.concat(newSkill));
+
+    const skill = {
+      id: String(new Date().getTime()),
+      name: newSkill,
+    };
+
+    setSkills(previousSkills => previousSkills.concat(skill));
     setNewSkill('');
   };
 
-  const handleCalculateGretting = () => {
+    const handleCalculateGretting = () => {
     const currentHours = new Date().getHours();
     console.info(currentHours);
 
@@ -73,8 +84,8 @@ export const Home = () => {
 
       <FlatList
         data={skills}
-        keyExtractor={item => item}
-        renderItem={({ item }) => <SkillCard skill={item} />}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => <SkillCard skill={item.name} />}
       />
     </SafeAreaView>
   );

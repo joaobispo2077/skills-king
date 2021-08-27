@@ -1,16 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text, GestureResponderEvent } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, TouchableOpacityProps } from 'react-native';
 
-export type ButtonProps = {
-  onPress: (text: GestureResponderEvent) => void;
-}
+export type ButtonProps = TouchableOpacityProps;
 
-export const Button: React.FC<ButtonProps> = ({ children, onPress }) => {
+export const Button: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
     <TouchableOpacity
       style={styles.button}
       activeOpacity={0.7}
-      onPress={onPress}
+      {...rest}
     >
       <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>

@@ -37,7 +37,12 @@ export const Home = () => {
     setNewSkill('');
   };
 
-    const handleCalculateGretting = () => {
+  const handleRemoveSkill = (id: string) => {
+    setSkills(previousSkills => previousSkills
+      .filter(prevSkill => prevSkill.id !== id));
+  };
+
+  const handleCalculateGretting = () => {
     const currentHours = new Date().getHours();
     console.info(currentHours);
 
@@ -85,7 +90,12 @@ export const Home = () => {
       <FlatList
         data={skills}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <SkillCard skill={item.name} />}
+        renderItem={({ item }) => (
+          <SkillCard 
+            onPress={() => handleRemoveSkill(item.id)} 
+            skill={item.name} 
+          />
+        )}
       />
     </SafeAreaView>
   );

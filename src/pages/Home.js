@@ -58,7 +58,7 @@ export const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Welcome, João</Text>
+      <Text style={styles.title}>Welcome, skills king</Text>
       <Text style={styles.greetings}>{gretting}</Text>
       <TextInput
         style={styles.input}
